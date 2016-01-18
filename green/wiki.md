@@ -7,7 +7,36 @@
 * last_message_text
 * last_message_date
 
+```sql
+SELECT
+  "broadcast"."id",
+  "broadcast"."create_time",
+  "broadcast"."doctor_id",
+  "broadcast"."text",
+  "broadcast"."tag_id",
+  "broadcast"."sent_tag_name",
+  "broadcast"."sent_count",
+  "broadcast"."doctor_disease_id",
+  "broadcast"."sent_disease_name",
+  "broadcast"."browse_count",
+  "broadcast"."category",
+  "broadcast"."source_url",
+  "broadcast"."content",
+  "broadcast"."is_created_by_internal_user",
+  "broadcast"."pub_status",
+  "broadcast"."is_deleted"
+FROM "broadcast"
+WHERE
+(
+  "broadcast"."tag_id" IS NULL
+  AND "broadcast"."is_deleted" = False  
+  AND "broadcast"."doctor_id" = 41118
+)
 
+ORDER BY "broadcast"."id" DESC  
+
+
+```
 url:
 > /patients/`<patient_id>`/followings/
 
@@ -32,7 +61,7 @@ output:
             ],
             "department": "骨科",
             "pk": 300846,
-            
+
             "doctor_pic_url": '',   # 医生头像
             "last_message_pk": '',   # 最近消息的id
             "last_message_text": '',   # 最近消息的text
@@ -129,9 +158,9 @@ output
       mpk: brc_1,
       type: 'ART'         //文章
       data: {
-          title:xxx, 
+          title:xxx,
           summary: xxx,  
-          pics: [xxxxx, xxxx, xxx], 
+          pics: [xxxxx, xxxx, xxx],
           is_complete:true
       }
       text: ‘[文章]’
@@ -140,15 +169,15 @@ output
 
   // 患者收到医生的broadcast
   {
-      actual_sender: doc_<doctor_id>,
-      from_user: doc_<doctor_id>,
-      to_user: pat_<patient_id>,
-      mpk: brc_1,
-      type: 'TXT'     // 纯文本
-      text: ‘[通知]’
-      data: 
-      ts: 1442646936,
-  }，
+      "actual_sender": "doc_<doctor_id>",
+      "from_user": "doc_<doctor_id>",
+      "to_user": "pat_<patient_id>",
+      "mpk": "brc_1",
+      "type": "TXT",
+      "text": "[通知]",
+      "data": "",
+      "ts": 1442646936,
+  }
 
 
   // 患者收到医生单发的文章
@@ -159,11 +188,11 @@ output
      mpk: msg_12,
      type: 'ART'         //文章
      data: {
-         pk:102, 
-         article_url:'xxxxxxx', 
-         title:xxx, 
+         pk:102,
+         article_url:'xxxxxxx',
+         title:xxx,
          summary: xxx,  
-         pics: [xxxxx, xxxx, xxx], 
+         pics: [xxxxx, xxxx, xxx],
          is_complete:true
      }   //其中pk是 对应broadcast的pk
      text:   ‘[文章]’
@@ -179,7 +208,7 @@ HttpBadRequest 400
 
 字段说明
 ```
- 
+
 actual_sender：可为：patient(pat)，doctor(doc)，grm（group member）  
 
 from_user:  发出消息的位置，可为 doctor(doc)，patient(pat)， gourp chat(grp)
@@ -240,7 +269,7 @@ mpk 前缀可为：msg（message），brc（broadcast），grp（group message�
 
 ## add messages
 
-url: 
+url:
 > patients/`<id>`/add_message/
 
 method: `POST`
@@ -280,7 +309,7 @@ input
 }
 ```
 
-output 
+output
 
 ```
 {
@@ -295,10 +324,10 @@ output
 ## history messages
 ```json
 {
-    'meta':{
-        'has_next_page':True/False
+    "meta":{
+        "has_next_page": true // false
     },
-    'objects':[{
+    "objects":[{
         "status": "8",
         "to_id": 41108,
         "text": "hello",
@@ -318,3 +347,5 @@ output
     }]
 }
 ```
+
+> http://0.0.0.0:8000/wap/articles/16/

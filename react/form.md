@@ -22,11 +22,11 @@
   getInitialState: function() {
     return {value: 'Hello!'};
   },
-  
+
   handleChange: function(event) {
     this.setState({value: event.target.value});
   },
-  
+
   render: function() {
     var value = this.state.value;
     return <input type="text" value={value} onChange={this.handleChange} />;
@@ -38,9 +38,9 @@
   render: function() {
     return <input type="text" />;
   }
-  
+
   // or
-  
+
   render: function() {
     return <input type="text" defaultValue="Hello!" />;
   }
@@ -57,7 +57,7 @@
 
 ```html
 <select value="B">
-    <option value="A">Apple</option>
+    <option value="A">Apple</option>Â
     <option value="B">Banana</option>
     <option value="C">Cranberry</option>
   </select>
