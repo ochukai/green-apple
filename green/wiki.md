@@ -7,34 +7,6 @@
 * last_message_text
 * last_message_date
 
-```sql
-SELECT
-  "broadcast"."id",
-  "broadcast"."create_time",
-  "broadcast"."doctor_id",
-  "broadcast"."text",
-  "broadcast"."tag_id",
-  "broadcast"."sent_tag_name",
-  "broadcast"."sent_count",
-  "broadcast"."doctor_disease_id",
-  "broadcast"."sent_disease_name",
-  "broadcast"."browse_count",
-  "broadcast"."category",
-  "broadcast"."source_url",
-  "broadcast"."content",
-  "broadcast"."is_created_by_internal_user",
-  "broadcast"."pub_status",
-  "broadcast"."is_deleted"
-FROM "broadcast"
-WHERE
-(
-  "broadcast"."tag_id" IS NULL
-  AND "broadcast"."is_deleted" = False  
-  AND "broadcast"."doctor_id" = 41118
-)
-
-ORDER BY "broadcast"."id" DESC  
-
 
 ```
 url:
